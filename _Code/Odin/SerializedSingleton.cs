@@ -70,12 +70,17 @@ namespace Gasanov.Core
         private static GameObject _instanceGameObject;
 
 
-        /// <param name="immidiate">Уничтожить мгновенно, а не в конце кадра.</param>
-        public static void DestroyIfExist(bool immidiate = false)
+        /// <param name="immediate">Уничтожить мгновенно, а не в конце кадра.</param>
+        public static void DestroyIfExist(bool immediate = false)
         {
             if (_instance != null)
             {
-                if (immidiate)
+                _instance = null;
+                
+                if (_instanceGameObject == null)
+                    return;
+                
+                if (immediate)
                 {
                     DestroyImmediate(_instanceGameObject);
                 }
